@@ -61,10 +61,10 @@ def json2text(result_json):
     else:
         text += '未发现稀有 tag 组合\n\n'
         for selected_tags in result_json['normal']:
-            text += '-----'
+            text += '----- '
             for tag in selected_tags:
                 text += (tag+' ')
-            text += '\b-----\n'
+            text += '-----\n'
 
             operator = result_json[level][selected_tags][0]
             flag = operators_list[operator]['level']

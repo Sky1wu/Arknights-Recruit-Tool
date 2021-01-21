@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def recruit():
+    status = 0
     if not request.json or 'image' not in request.json:
         msg = '未收到图片！'
     else:
@@ -22,6 +23,7 @@ def recruit():
         print(tags)
 
         if len(tags) == 5:
+            status = 1
             result = ''
 
             for tag in tags:
@@ -34,6 +36,7 @@ def recruit():
             msg = 'tag 识别失败'
 
     response = {
+        'status': status,
         'msg': msg
     }
 

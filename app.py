@@ -5,8 +5,13 @@ from get_tags import get_tags
 from operators_fliter import operators_filter
 from json2text import json2text
 import numpy as np
+import time
 
 app = Flask(__name__)
+
+
+def get_time():
+    return str(int(time.time()*10**6))
 
 
 @app.route('/', methods=['POST'])
@@ -34,6 +39,7 @@ def recruit():
             msg = result + json2text(result_json)
         else:
             msg = 'tag 识别失败'
+            cv2.imwrite('error_img/'+get_time()+'.png', img)
 
     response = {
         'status': status,

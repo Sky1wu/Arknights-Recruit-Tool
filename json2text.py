@@ -46,13 +46,13 @@ def json2text(result_json):
                         text += '★'
                     text += ': '
                     for operator in result_json[level][selected_tags]:
+                        now_level = operators_list[operator]['level']
                         if now_level != flag:
                             text += '\n'
                             flag = operators_list[operator]['level']
                             for _ in range(flag):
                                 text += '★'
                             text += ': '
-                        now_level = operators_list[operator]['level']
                         text += (operator+' ')
 
                 text += '\n'
@@ -89,7 +89,7 @@ def json2text(result_json):
 
 
 if __name__ == "__main__":
-    tags = ['狙击干员', '辅助干员', '治疗', '新手', '防护']
+    tags = ['快速复活', '辅助干员', '治疗', '新手', '防护']
 
     result_json = operators_filter(tags)
 

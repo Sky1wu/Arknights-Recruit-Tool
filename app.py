@@ -8,6 +8,7 @@ import numpy as np
 import time
 
 app = Flask(__name__)
+version = '1.1'
 
 
 def get_time():
@@ -29,7 +30,11 @@ def recruit():
 
         if len(tags) == 5:
             status = 1
-            result = ''
+
+            if 'version' not in request.json or request.json['version'] != version:
+                result = '快捷指令有更新，请前往 NGA 获取最新快捷指令！\n\n'
+            else:
+                result = ''
 
             for tag in tags:
                 result += (tag+' ')

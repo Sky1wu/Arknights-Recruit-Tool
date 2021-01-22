@@ -19,8 +19,16 @@ def correct_tag(text):
 
 def identify_tags_img(img):
     height, width = img.shape[0], img.shape[1]
+    new_width = int(width/height*1080)
 
-    img = cv2.resize(img, (int(width/height*1080), 1080))
+    img = cv2.resize(img, (new_width, 1080))
+
+    offset = int(new_width/20)
+
+    y1 = int(new_width/2*1/2)-offset
+    y2 = new_width-y1-offset
+
+    img = img[270:810, y1:y2]
 
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -34,14 +42,14 @@ def identify_tags_img(img):
     for cnt in contours:
         length = cv2.arcLength(cnt, True)
         area = cv2.contourArea(cnt)
-        cnt = cv2.approxPolyDP(cnt, 0.02*length, True)
+        cnt = cv2.approxPolyDP(cnt, 0.025*length, True)
 
-        if len(cnt) == 4 and cv2.isContourConvex(cnt) and area > 8000 and area < 30000:
+        if len(cnt) == 4 and cv2.isContourConvex(cnt) and area > 7000:
             cv_contours.append(cnt)
 
     tags_img = []
 
-    for tag in cv_contours[5:0:-1]:
+    for tag in cv_contours[4::-1]:
         x, y, w, h = cv2.boundingRect(tag)
         tag = img[y:y+h, x:x+w]
         tags_img.append(tag)

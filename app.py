@@ -41,7 +41,6 @@ def recruit():
             msg = result + json2text(result_json)
         else:
             msg = 'tag 识别失败'
-            cv2.imwrite('error_img/'+get_time()+'.png', img)
 
     if 'version' not in request.json or request.json['version'] != version:
         msg = '快捷指令有更新，请前往 NGA 获取最新快捷指令！\n\n'+msg

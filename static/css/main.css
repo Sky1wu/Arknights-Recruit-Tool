@@ -1,0 +1,24 @@
+body {
+    padding: 50px;
+    background-color: #39C5BB;
+}
+
+.base {
+    z-index:2;
+    position: absolute;
+    padding: 15px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.2);
+    background-color:white;
+    text-align: center;
+    width: 350px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top:15%;
+
+}
+button{
+  margin-bottom: 10px;
+}

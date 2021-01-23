@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>明日方舟公开招募计算器</h3>
+<h5 style="color: gray;">for iOS</h5>
+
+<hr>
+
+<p>在 Safari 中点击按钮即可添加快捷指令。</p>
+<p>具体使用方法可参考 NGA 原贴：<a href="https://ngabbs.com/read.php?tid=25206054">点击前往</a></p>
+<button onclick="window.location.href='{{ shortcuts }}'" type="button" class="btn btn-info">添加快捷指令</button>
+<p>当前版本：<a style="color: red;">{{ version }}</a></p>
+<hr>
+<p>如果你愿意请开发者喝一瓶饮料，我会非常开心的 (〃∀〃)。</p>
+
+<div class="donate">
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#alipay">
+            支付宝
+        </button>
+        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#wechat">
+            微信
+        </button>
+    </p>
+    <div class="collapse" id="alipay">
+        <div class="card card-body">
+            <img src="static/images/alipay.jpg" class="img-fluid rounded">
+        </div>
+    </div>
+    <div class="collapse" id="wechat">
+        <div class="card card-body">
+            <img src="static/images/wechat.jpg" class="img-fluid rounded">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

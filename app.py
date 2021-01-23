@@ -5,7 +5,6 @@ from get_tags import get_tags
 from operators_fliter import operators_filter
 from json2text import json2text
 import numpy as np
-import time
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
@@ -13,10 +12,6 @@ bootstrap = Bootstrap(app)
 
 version = '1.2'
 shortcuts = 'https://www.icloud.com/shortcuts/0aa6e6bb33ff49eeaa0288c4298aa9e2'
-
-
-def get_time():
-    return str(int(time.time()*10**6))
 
 
 @app.route('/', methods=['GET', 'POST'])

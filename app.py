@@ -11,8 +11,8 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
-version = '1.1'
-shortcuts = 'https://www.icloud.com/shortcuts/9ced409dbddc4465bb1d8799ac13337b'
+version = '1.2'
+shortcuts = 'https://www.icloud.com/shortcuts/0aa6e6bb33ff49eeaa0288c4298aa9e2'
 
 
 def get_time():
@@ -48,7 +48,7 @@ def recruit():
                 msg = 'tag 识别失败'
 
         if 'version' not in request.json or request.json['version'] != version:
-            msg = '快捷指令有更新，请前往 NGA 获取最新快捷指令！\n\n'+msg
+            msg = '快捷指令有更新，请前往 akhr.imwtx.com 获取最新快捷指令！\n\n'+msg
 
         response = {
             'status': status,

@@ -6,6 +6,9 @@ from operators_fliter import operators_filter
 from json2text import json2text
 import numpy as np
 from flask_bootstrap import Bootstrap
+import csv
+import os
+
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -53,6 +56,23 @@ def recruit():
         return response
     else:
         return render_template('index.html', shortcuts=shortcuts, version=version)
+
+
+@app.route('/donate')
+def donate():
+    date = []
+    amount = []
+    name = []
+    file_dir = 'donate.csv'
+    if os.path.exists(file_dir):
+        with open(file_dir, 'r') as file:
+            reader = csv.reader(file)
+            for item in reader:
+                date.append(item[0])
+                amount.append(item[1])
+                name.append(item[2])
+
+    return render_template('donate.html', date=date, amount=amount, name=name, length=len(name))
 
 
 if __name__ == "__main__":

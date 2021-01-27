@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>捐赠名单</h3>
+{% if length == 0 %}
+<p class="short">目前还没有人捐赠。</p>
+{% else %}
+<p class="short">感谢这些朋友们的支持！</p>
+<table class="table table-hover" style="margin: auto;">
+    <thead>
+        <tr>
+            <th>时间</th>
+            <th>金额</th>
+            <th>名字</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in range(length) %}
+        <tr>
+            <td>{{ date[i] }}</td>
+            <td>{{ amount[i] }}</td>
+            <td>{{ name[i] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

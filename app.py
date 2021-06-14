@@ -13,8 +13,8 @@ import os
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
-version = '1.2'
-shortcuts = 'https://www.icloud.com/shortcuts/0aa6e6bb33ff49eeaa0288c4298aa9e2'
+version = '1.3'
+shortcuts = 'https://www.icloud.com/shortcuts/ba65fd65334d48bb9d9ba0ae89e17a85'
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -46,7 +46,7 @@ def recruit():
                 msg = 'tag 识别失败'
 
         if 'version' not in request.json or request.json['version'] != version:
-            msg = '快捷指令有更新，请前往 akhr.imwtx.com 获取最新快捷指令！\n\n'+msg
+            msg = '快捷指令有更新，请前往 https://akhr.imwtx.com 获取最新快捷指令！\n\n'+msg
 
         response = {
             'status': status,

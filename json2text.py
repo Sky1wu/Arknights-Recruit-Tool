@@ -25,8 +25,11 @@ def json2text(result_json):
                 else:
                     text += ('仅包含 1 星小车或 '+next_level+' 星以上干员\n')
         else:
-            next_level = level_limited[-1]
-            text += ('仅包含 '+next_level+' 星以上干员\n')
+            next_level = level_limited[0]
+            if next_level == '6':
+                text += ('仅包含 '+next_level+' 星干员\n')
+            else:
+                text += ('仅包含 '+next_level+' 星以上干员\n')
 
         text += '\n'
 
@@ -95,7 +98,7 @@ def json2text(result_json):
 
 
 if __name__ == "__main__":
-    tags = ['狙击干员', '爆发', '先锋干员', '支援机械', '群攻']
+    tags = ['快速复活', '特种干员', '资深干员', '先锋干员', '费用回复']
 
     result_json = operators_filter(tags)
 

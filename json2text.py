@@ -15,22 +15,6 @@ def json2text(result_json):
     if level_limited:
         text += '！！存在稀有 tag 组合！！\n'
 
-        if '1' in level_limited:
-            if len(level_limited) == 1:
-                text += '仅包含 1 星小车\n'
-            else:
-                next_level = level_limited[0]
-                if next_level == '6':
-                    text += ('仅包含 1 星小车或 '+next_level+' 星干员\n')
-                else:
-                    text += ('仅包含 1 星小车或 '+next_level+' 星以上干员\n')
-        else:
-            next_level = level_limited[0]
-            if next_level == '6':
-                text += ('仅包含 '+next_level+' 星干员\n')
-            else:
-                text += ('仅包含 '+next_level+' 星以上干员\n')
-
         text += '\n'
 
         for level in result_json:
@@ -98,7 +82,7 @@ def json2text(result_json):
 
 
 if __name__ == "__main__":
-    tags = ['快速复活', '特种干员', '资深干员', '先锋干员', '费用回复']
+    tags = ['辅助干员', '近卫干员', '近战位', '特种干员', '群攻']
 
     result_json = operators_filter(tags)
 

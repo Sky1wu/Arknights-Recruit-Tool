@@ -1,5 +1,5 @@
 Flask==1.1.2
-numpy==1.19.5
+numpy==1.21.0
 opencv-python==4.5.1.48
 Pillow==9.0.0
 pytesseract==0.3.7

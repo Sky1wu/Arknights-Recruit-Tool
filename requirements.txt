@@ -1,6 +1,6 @@
 Flask==1.1.2
 numpy==1.21.0
 opencv-python==4.5.1.48
-Pillow==9.0.0
+Pillow==9.0.1
 pytesseract==0.3.7
 Bootstrap-Flask==1.5.1

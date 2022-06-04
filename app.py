@@ -12,6 +12,7 @@ import os
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
+app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
 version = '1.3'
 shortcuts = 'https://www.icloud.com/shortcuts/ba65fd65334d48bb9d9ba0ae89e17a85'

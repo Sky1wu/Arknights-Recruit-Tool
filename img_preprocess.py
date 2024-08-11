@@ -5,8 +5,8 @@ import numpy as np
 
 def threshold(img):
     grayimg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    _, bwimg1 = cv2.threshold(grayimg, 127, 255, cv2.THRESH_BINARY)
-    _, bwimg2 = cv2.threshold(grayimg, 127, 255, cv2.THRESH_TOZERO)
+    _, bwimg1 = cv2.threshold(grayimg, 120, 255, cv2.THRESH_BINARY)
+    _, bwimg2 = cv2.threshold(grayimg, 120, 255, cv2.THRESH_TOZERO)
     return bwimg1, bwimg2
 
 

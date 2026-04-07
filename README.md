@@ -46,7 +46,7 @@ pip install -r requirements.txt
 ### 本地启动
 
 ```bash
-python app.py
+python -m ark_recruit_tool
 ```
 
 服务默认启动在 `http://127.0.0.1:5000`。
@@ -122,6 +122,12 @@ sudo systemctl restart "$DEPLOY_SERVICE_NAME"
 ```
 
 这里默认假设你的线上是 `gunicorn + systemd`，也就是通过重启 `gunicorn` 的 systemd service 完成发布。
+
+如果你直接配置 `gunicorn`，推荐使用：
+
+```bash
+gunicorn ark_recruit_tool.wsgi:app
+```
 
 使用前请先在 GitHub 仓库里配置这些 secrets：
 

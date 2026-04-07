@@ -6,31 +6,67 @@
 
 [明日方舟公开招募计算器](https://akhr.imwtx.com)
 
+## 项目说明
+
+项目提供一个面向 iOS 快捷指令的公开招募识别接口：
+
+- `POST /` 接收 base64 编码截图，返回 `status` / `msg` JSON
+- `GET /` 提供快捷指令落地页
+- `GET /donate` 展示捐赠名单
+
+当前项目已经重构为单体 Flask 应用，核心代码位于 [ark_recruit_tool/](/home/sky1wu/workspace/Arknights-Recruit-Tool/ark_recruit_tool)：
+
+- `web/` 路由和页面渲染
+- `services/` 识别流程编排
+- `domain/` tag 分析和文本渲染
+- `infra/` OCR、图像处理、数据仓储
+
 ## 开发
 
-### 环境依赖
+### 环境准备
 
-- Python 3.11+
+- Python 3.12+
 - Tesseract OCR
 - `ark_recruit.traineddata` 放在项目根目录
+- 建议使用项目内的 `.venv`
+
+### 创建虚拟环境
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+```
 
 ### 安装依赖
 
 ```bash
-python3 -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 本地启动
 
 ```bash
-python3 app.py
+python app.py
 ```
+
+服务默认启动在 `http://127.0.0.1:5000`。
 
 ### 运行测试
 
 ```bash
-python3 -m pytest
+python -m pytest
 ```
+
+## 数据格式
+
+公开招募数据现在统一保存在 `data/recruitment.json`，包含：
+
+- `source`: 数据来源
+- `generated_at`: 生成时间
+- `operator_count`: 干员数量
+- `operators`: 干员列表
+
+运行时会对 JSON 做基础 schema 校验，字段缺失或格式错误会在仓储层直接报错。
 
 ## 安装
 
@@ -57,7 +93,11 @@ python3 -m pytest
 手动更新也可以直接运行：
 
 ```bash
-python3 scripts/update_recruit_data.py
+python scripts/update_recruit_data.py
 ```
 
 默认数据源为 MAA 的 `dev-v2` 分支 `resource/recruitment.json`。
+
+## 变更记录
+
+最近的重要变更见 [CHANGELOG.md](/home/sky1wu/workspace/Arknights-Recruit-Tool/CHANGELOG.md)。

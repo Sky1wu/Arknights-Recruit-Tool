@@ -1,38 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>明日方舟公开招募计算器</h3>
-<h5 style="color: gray;">for iOS</h5>
-
-<hr>
-
-<p>在 Safari 中点击按钮即可添加快捷指令。</p>
-<p>具体使用方法可参考 NGA 原贴：<a href="https://ngabbs.com/read.php?tid=25206054">点击前往</a></p>
-<button onclick="window.location.href='{{ shortcuts }}'" type="button" class="btn btn-info">添加快捷指令</button>
-<p>当前版本：<a style="color: red;">{{ version }}</a></p>
-<hr>
-<a href="donate">捐赠名单</a>
-<p>如果你愿意请开发者喝一瓶饮料，我会非常开心的 (〃∀〃)。</p>
-
-<div class="donate">
-    <p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#alipay">
-            支付宝
-        </button>
-        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#wechat">
-            微信
-        </button>
-    </p>
-    <div class="collapse" id="alipay">
-        <div class="card card-body">
-            <img src="static/images/alipay.jpg" class="img-fluid rounded">
-        </div>
+<section class="card hero-card">
+    <p class="eyebrow">Arknights Recruit Tool</p>
+    <h1>明日方舟公开招募计算器</h1>
+    <p class="subhead">for iOS 快捷指令</p>
+    <p class="lead">在 iPhone 或 iPad 的 Safari 中打开本页，点击下方按钮即可添加快捷指令。</p>
+    <div class="actions">
+        <a class="button primary" href="{{ shortcuts }}">添加快捷指令</a>
+        <a class="button secondary" href="https://ngabbs.com/read.php?tid=25206054">查看原贴说明</a>
     </div>
-    <div class="collapse" id="wechat">
-        <div class="card card-body">
-            <img src="static/images/wechat.jpg" class="img-fluid rounded">
-        </div>
-    </div>
-</div>
+    <p class="version">当前版本 <strong>{{ version }}</strong></p>
+</section>
 
+<section class="card info-card">
+    <h2>使用提示</h2>
+    <p>调用脚本时，请确保公开招募页面还没有选择任何 tag，否则可能影响识别结果。</p>
+    <p>如果快捷指令提示版本过旧，回到本页重新获取即可。</p>
+</section>
+
+<section class="card donate-card">
+    <div class="section-head">
+        <h2>支持项目</h2>
+        <a href="{{ url_for('main.donate') }}">查看捐赠名单</a>
+    </div>
+    <p>如果这个工具帮到了你，也欢迎请开发者喝一瓶饮料。</p>
+    <div class="donation-grid">
+        <figure>
+            <img src="{{ url_for('static', filename='images/alipay.jpg') }}" alt="支付宝赞赏码">
+            <figcaption>支付宝</figcaption>
+        </figure>
+        <figure>
+            <img src="{{ url_for('static', filename='images/wechat.jpg') }}" alt="微信赞赏码">
+            <figcaption>微信</figcaption>
+        </figure>
+    </div>
+</section>
 {% endblock %}

@@ -1,84 +1,44 @@
-from operators_fliter import operators_filter
-from data.operators import operators_list
+from ark_recruit_tool.config import AppConfig
+from ark_recruit_tool.domain.models import CombinationResult, RecruitResult
+from ark_recruit_tool.domain.renderers import LegacyMessageRenderer
+from ark_recruit_tool.infra.repository import RecruitmentRepository
+
+
+def _build_combination(tags, operator_names, operator_lookup):
+    return CombinationResult(
+        tags=tuple(tags),
+        operators=tuple(
+            operator_lookup[name]
+            for name in operator_names
+        ),
+    )
 
 
 def json2text(result_json):
-    text = ''
-
-    level_limited = []
-
-    for level in result_json:
-        if level == 'normal':
-            continue
-        if result_json[level]:
-            level_limited.append(level)
-    if level_limited:
-        text += '！！存在稀有 tag 组合！！\n'
-
-        text += '\n'
-
-        for level in result_json:
-            if level == 'normal':
-                continue
-            for selected_tags in result_json[level]:
-                text += '-----'
-                for tag in selected_tags:
-                    text += (tag+' ')
-                text += '\b-----\n'
-
-                if '高级资深干员' in selected_tags:
-                    text += '★★★★★★: '
-                    for operator in result_json[level][selected_tags]:
-                        text += (operator+' ')
-
-                else:
-                    operator = result_json[level][selected_tags][0]
-                    flag = operators_list[operator]['level']
-                    now_level = flag
-                    for _ in range(flag):
-                        text += '★'
-                    text += ': '
-                    for operator in result_json[level][selected_tags]:
-                        now_level = operators_list[operator]['level']
-                        if now_level != flag:
-                            text += '\n'
-                            flag = operators_list[operator]['level']
-                            for _ in range(flag):
-                                text += '★'
-                            text += ': '
-                        text += (operator+' ')
-
-                text += '\n'
-                text += '\n'
-
-    else:
-        text += '未发现稀有 tag 组合\n\n'
-        for selected_tags in result_json['normal']:
-            text += '----- '
-            for tag in selected_tags:
-                text += (tag+' ')
-            text += '-----\n'
-
-            operator = result_json[level][selected_tags][0]
-            flag = operators_list[operator]['level']
-            now_level = flag
-            for _ in range(flag):
-                text += '★'
-            text += ': '
-
-            for operator in result_json[level][selected_tags]:
-                now_level = operators_list[operator]['level']
-                if now_level != flag:
-                    text += '\n'
-                    flag = operators_list[operator]['level']
-                    for _ in range(flag):
-                        text += '★'
-                    text += ': '
-                text += (operator+' ')
-            text += '\n'
-            text += '\n'
-
-    return text
+    renderer = LegacyMessageRenderer()
+    repository = RecruitmentRepository(AppConfig())
+    operator_lookup = {
+        operator.name: operator
+        for operator in (*repository.list_operators(), *repository.list_top_operators())
+    }
+    rare = {
+        level: tuple(
+            _build_combination(selected_tags, operators, operator_lookup)
+            for selected_tags, operators in result_json[level].items()
+        )
+        for level in ("6", "5", "4", "1")
+    }
+    normal = tuple(
+        _build_combination(selected_tags, operators, operator_lookup)
+        for selected_tags, operators in result_json["normal"].items()
+    )
+    return renderer.render(
+        RecruitResult(
+            status=1,
+            rare_combinations=rare,
+            normal_combinations=normal,
+        )
+    )
 
 
 if __name__ == "__main__":

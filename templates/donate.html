@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>捐赠名单</h3>
-{% if length == 0 %}
-<p class="short">目前还没有人捐赠。</p>
+<section class="card donate-list-card">
+<div class="section-head">
+    <h1>捐赠名单</h1>
+    <a href="{{ url_for('main.index') }}">返回首页</a>
+</div>
+{% if not records %}
+<p class="empty-state">目前还没有人捐赠。</p>
 {% else %}
-<p class="short">感谢这些朋友们的支持！</p>
-<table class="table table-hover" style="margin: auto;">
+<p class="lead">感谢这些朋友们的支持。</p>
+<table class="donate-table">
     <thead>
         <tr>
             <th>时间</th>
@@ -15,14 +19,15 @@
         </tr>
     </thead>
     <tbody>
-        {% for i in range(length) %}
+        {% for record in records %}
         <tr>
-            <td>{{ date[i] }}</td>
-            <td>{{ amount[i] }}</td>
-            <td>{{ name[i] }}</td>
+            <td>{{ record.date }}</td>
+            <td>{{ record.amount }}</td>
+            <td>{{ record.name }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 {% endif %}
+</section>
 {% endblock %}

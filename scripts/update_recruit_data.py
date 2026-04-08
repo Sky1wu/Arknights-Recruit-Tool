@@ -37,6 +37,29 @@ def transform_recruitment(recruitment: dict, source_url: str) -> dict:
     }
 
 
+def load_existing_output(path: Path) -> dict | None:
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def has_meaningful_changes(new_payload: dict, existing_payload: dict | None) -> bool:
+    if existing_payload is None:
+        return True
+
+    keys = ("source", "operator_count", "operators")
+    return any(new_payload[key] != existing_payload.get(key) for key in keys)
+
+
+def merge_generated_at(new_payload: dict, existing_payload: dict | None) -> dict:
+    if has_meaningful_changes(new_payload, existing_payload):
+        return new_payload
+
+    merged = dict(new_payload)
+    merged["generated_at"] = existing_payload["generated_at"]
+    return merged
+
+
 def write_output(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
@@ -59,8 +82,12 @@ def main() -> int:
     args = parser.parse_args()
 
     recruitment = fetch_recruitment(args.source_url)
-    transformed = transform_recruitment(recruitment, args.source_url)
     output_path = Path(args.output)
+    existing_payload = load_existing_output(output_path)
+    transformed = merge_generated_at(
+        transform_recruitment(recruitment, args.source_url),
+        existing_payload,
+    )
     write_output(output_path, json.dumps(transformed, ensure_ascii=False, indent=2) + "\n")
 
     print(

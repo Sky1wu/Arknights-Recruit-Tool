@@ -1,7 +1,7 @@
 {
   "source": "https://raw.githubusercontent.com/MaaAssistantArknights/MaaAssistantArknights/dev-v2/resource/recruitment.json",
-  "generated_at": "2026-04-08T05:04:30.419230Z",
-  "operator_count": 156,
+  "generated_at": "2026-05-02T02:15:22.498462Z",
+  "operator_count": 158,
   "operators": [
     {
       "name": "CONFESS-47",
@@ -31,6 +31,16 @@
         "近战位",
         "重装干员",
         "防护"
+      ]
+    },
+    {
+      "name": "GALLUS²",
+      "level": 1,
+      "tags": [
+        "削弱",
+        "支援机械",
+        "术师干员",
+        "远程位"
       ]
     },
     {
@@ -1348,6 +1358,17 @@
         "先锋干员",
         "费用回复",
         "输出",
+        "近战位",
+        "高级资深干员"
+      ]
+    },
+    {
+      "name": "帕拉斯",
+      "level": 6,
+      "tags": [
+        "支援",
+        "输出",
+        "近卫干员",
         "近战位",
         "高级资深干员"
       ]
